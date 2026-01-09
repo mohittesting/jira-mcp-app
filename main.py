@@ -28,32 +28,19 @@ class JiraMCPTool(BaseTool):
         print("[MCP] Starting mcp-atlassian server...", file=sys.stderr)
         
         # Start MCP Atlassian server
-        try:
-            self._proc = subprocess.Popen(
-                ["node", "node_modules/@modelcontextprotocol/server-atlassian/dist/index.js"],
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
-                bufsize=1,
-                env={**subprocess.os.environ}
-            )
-        except FileNotFoundError:
-            # Try without npx
-            try:
-                self._proc = subprocess.Popen(
-                    ["mcp-atlassian"],
-                    stdin=subprocess.PIPE,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    text=True,
-                    bufsize=1
-                )
-            except FileNotFoundError:
-                raise RuntimeError(
-                    "Could not find mcp-atlassian. Install it with:\n"
-                    "npm install -g @modelcontextprotocol/server-atlassian"
-                )
+        self._proc = subprocess.Popen(
+            [
+                "node",
+                "node_modules/@modelcontextprotocol/server-atlassian/dist/index.js"
+            ],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            bufsize=1,
+            env={**subprocess.os.environ}
+        )
+
 
         print(f"[MCP] Process started with PID: {self._proc.pid}", file=sys.stderr)
         self._responses = queue.Queue()
