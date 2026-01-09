@@ -1,0 +1,8 @@
+{
+  "name": "jira-mcp-service",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@modelcontextprotocol/server-atlassian": "latest"
+  }
+}
