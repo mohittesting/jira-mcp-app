@@ -30,7 +30,7 @@ class JiraMCPTool(BaseTool):
         # Start MCP Atlassian server
         try:
             self._proc = subprocess.Popen(
-                ["npx", "-y", "@modelcontextprotocol/server-atlassian"],
+                ["node", "node_modules/@modelcontextprotocol/server-atlassian/dist/index.js"],
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
